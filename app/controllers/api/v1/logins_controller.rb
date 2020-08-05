@@ -16,7 +16,7 @@ module Api
             render json: { csrf: result[:tokens][:csrf] }
           end,
           invalid: lambda do |result|
-            render result['contract.default'].errors, status: :unauthorized
+            render json: result['contract.default'].errors, status: :unauthorized
           end
         }
       end

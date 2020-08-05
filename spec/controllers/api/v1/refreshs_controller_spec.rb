@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Api::V1::RefreshsController do
+RSpec.describe Api::V1::RefreshsController, type: :controller do
   let(:access_cookie) { tokens[:access] }
   let(:csrf_token) { tokens[:csrf] }
   let(:user) { create(:user) }

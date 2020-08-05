@@ -1,0 +1,6 @@
+Lint/UnreachableCode:
+  Exclude:
+    - '*/**/concepts/**/operation/**/*'
+Style/SignalException:
+  Exclude:
+    - '*/**/concepts/**/operation/**/*'

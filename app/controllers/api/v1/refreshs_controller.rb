@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class RefreshsController < ApplicationController
@@ -15,7 +17,7 @@ module Api
 
       def default_handler
         {
-          success: -> (result) do
+          success: lambda do |result|
             set_token(result[:tokens][:access])
             render json: { csrf: result[:tokens][:csrf] }
           end
@@ -24,9 +26,9 @@ module Api
 
       def set_token(token)
         response.set_cookie(JWTSessions.access_cookie,
-          value: token,
-          httponly: true,
-          secure: Rails.env.production?)
+                            value: token,
+                            httponly: true,
+                            secure: Rails.env.production?)
       end
     end
   end

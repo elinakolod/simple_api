@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class LoginsController < ApplicationController
@@ -9,12 +11,11 @@ module Api
 
       def default_handler
         {
-          success: -> (result) do
+          success: lambda do |result|
             set_token(result[:tokens][:access])
             render json: { csrf: result[:tokens][:csrf] }
           end,
-          invalid: -> (result) do
-            binding.pry
+          invalid: lambda do |result|
             render result['contract.default'].errors, status: :unauthorized
           end
         }
@@ -22,8 +23,8 @@ module Api
 
       def set_token(token)
         response.set_cookie(JWTSessions.access_cookie,
-          value: token,
-          httponly: true)
+                            value: token,
+                            httponly: true)
       end
     end
   end

@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class Jwt::Login < Trailblazer::Operation
       step Model(User, :new)
-      step Contract::Build( constant: Jwt::Contract::Login )
+      step Contract::Build(constant: Jwt::Contract::Login)
       step Contract::Validate()
       step :find_user
       step :create_session
@@ -13,7 +15,6 @@ module Api
       end
 
       def create_session(options, model:, params:, **)
-        binding.pry
         options[:session] = JWTSessions::Session.new(payload: { user_id: model.id }, refresh_by_access_allowed: true)
       end
 

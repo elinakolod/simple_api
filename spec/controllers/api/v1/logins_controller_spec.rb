@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Api::V1::LoginsController, type: :controller do
   describe 'POST #create' do
     let(:password) { 'password' }

@@ -7,4 +7,6 @@ class User
   field :email, type: String
 
   index({ email: 1 }, { unique: true, name: 'email_index' })
+
+  has_many :videos, dependent: :destroy
 end

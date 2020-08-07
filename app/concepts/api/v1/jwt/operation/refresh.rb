@@ -3,8 +3,10 @@
 module Api
   module V1
     class Jwt::Refresh < Trailblazer::Operation
-      step :create_session
-      step :refresh_session
+      step Rescue( JWTSessions::Errors::Error, handler: Jwt::Handlers::SessionErrorsHandler ) {
+        step :create_session
+        step :refresh_session
+      }
 
       def create_session(options, params:, **)
         options[:session] = JWTSessions::Session.new(payload: params[:payload], refresh_by_access_allowed: true)

@@ -20,6 +20,9 @@ module Api
           success: lambda do |result|
             set_token(result[:tokens][:access])
             render json: { csrf: result[:tokens][:csrf] }
+          end,
+          invalid: lambda do |result|
+            render json: result[:exception_message], status: :unauthorized
           end
         }
       end

@@ -3,7 +3,7 @@
 module Api
   module V1
     module Jwt::Contract
-      class Login < Reform::Form
+      class Login < ApplicationContract
         property :email
 
         validation do

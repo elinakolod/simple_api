@@ -7,8 +7,10 @@ module Api
       step Contract::Build(constant: Jwt::Contract::Login)
       step Contract::Validate()
       step :find_user
-      step :create_session
-      step :login
+      step Rescue( JWTSessions::Errors::Error, handler: Jwt::Handlers::SessionErrorsHandler ) {
+        step :create_session
+        step :login
+      }
 
       def find_user(options, params:, **)
         options[:model] = User.find_or_create_by(email: params[:email])

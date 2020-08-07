@@ -22,4 +22,19 @@ RSpec.describe Api::V1::Jwt::Refresh do
     expect(result[:tokens][:access]).not_to be_empty
     expect(result[:tokens][:csrf]).not_to be_empty
   end
+
+  context 'JWTSessions errors' do
+    let(:error_message) { /JWTSessions::Errors::ClaimsVerification/ }
+    let(:exception) { JWTSessions::Errors::ClaimsVerification }
+
+    before do
+      allow(JWTSessions::Session).to receive(:new).and_raise(exception)
+    end
+
+    it 'it fails' do
+      result = refresh_token
+      expect(result).to be_failure
+      expect(result[:exception_message]).to match(error_message)
+    end
+  end
 end

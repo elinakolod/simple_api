@@ -6,10 +6,6 @@ RSpec.describe Api::V1::Jwt::Login do
   let(:params) { { email: email } }
   let(:login_user) { Api::V1::Jwt::Login.( params: params ) }
 
-  before do
-    user
-  end
-
   context 'valid params' do
     it 'is successful' do
       result = login_user
@@ -27,7 +23,22 @@ RSpec.describe Api::V1::Jwt::Login do
     it 'it fails' do
       result = login_user
       expect(result).to be_failure
-      #expect(result['contract.default'].errors).to match(error_message)
+      expect(result['contract.default'].errors.full_messages).to include(error_message)
+    end
+  end
+
+  context 'JWTSessions errors' do
+    let(:error_message) { /JWTSessions::Errors::InvalidPayload/ }
+    let(:exception) { JWTSessions::Errors::InvalidPayload }
+
+    before do
+      allow_any_instance_of(JWTSessions::Session).to receive(:login).and_raise(exception)
+    end
+
+    it 'it fails' do
+      result = login_user
+      expect(result).to be_failure
+      expect(result[:exception_message]).to match(error_message)
     end
   end
 end

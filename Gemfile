@@ -15,7 +15,7 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 gem 'puma', '~> 4.1'
 gem 'rails_best_practices'
 gem 'redis'
-gem 'reform'
+gem 'reform-rails'
 gem 'shrine', '~> 3.0'
 gem "shrine-mongoid", "~> 1.0"
 gem 'simple_endpoint', '~> 1.0.0'

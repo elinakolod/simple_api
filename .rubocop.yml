@@ -1,3 +1,14 @@
+AllCops:
+  EnabledByDefault: true
+
+Style/DocumentationMethod:
+  Enabled: false
+Lint/ConstantResolution:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/Copyright:
+  Enabled: false
 Lint/UnreachableCode:
   Exclude:
     - '*/**/concepts/**/operation/**/*'

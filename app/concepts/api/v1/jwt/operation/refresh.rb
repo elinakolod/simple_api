@@ -3,7 +3,7 @@
 module Api
   module V1
     class Jwt::Refresh < Trailblazer::Operation
-      step Rescue( JWTSessions::Errors::Error, handler: Jwt::Handlers::SessionErrorsHandler ) {
+      step Rescue(JWTSessions::Errors::Error, handler: Api::V1::Handlers::ErrorsHandler) {
         step :create_session
         step :refresh_session
       }

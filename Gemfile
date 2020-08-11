@@ -4,8 +4,10 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.0'
+gem 'active_model_serializers'
 gem 'database_cleaner-mongoid'
 gem 'dry-validation'
+gem 'fast_jsonapi'
 gem 'jwt_sessions'
 gem 'mongoid', '~> 7.0.5'
 gem 'mongoid-rspec'
@@ -17,8 +19,10 @@ gem 'rails_best_practices'
 gem 'redis'
 gem 'reform-rails'
 gem 'shrine', '~> 3.0'
-gem "shrine-mongoid", "~> 1.0"
+gem 'shrine-mongoid', '~> 1.0'
+gem 'sidekiq'
 gem 'simple_endpoint', '~> 1.0.0'
+gem 'streamio-ffmpeg'
 gem 'trailblazer-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'

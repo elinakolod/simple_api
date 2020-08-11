@@ -11,3 +11,5 @@ Shrine.storages = {
 Shrine.plugin :mongoid
 Shrine.plugin :cached_attachment_data
 Shrine.plugin :restore_cached_data
+Shrine.plugin :validation_helpers
+Shrine.plugin :add_metadata

@@ -7,6 +7,10 @@ class ApplicationController < ActionController::API
 
   private
 
+  def current_user
+    @current_user ||= User.find(payload['user_id'])
+  end
+
   def not_authorized
     render json: { error: 'Not authorized' }, status: :unauthorized
   end
@@ -21,7 +25,9 @@ class ApplicationController < ActionController::API
   def default_handler
     {
       success: ->(result, **opts) { render json: result[:model], **opts, status: 200 },
-      invalid: ->(result, **) { render json: result['contract.default'].errors, status: :unprocessable_entity }
+      invalid: ->(result, **) do
+        render json: result[:exception_message] || result['contract.default'].errors.full_messages, status: :unprocessable_entity
+      end
     }
   end
 end

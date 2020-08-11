@@ -7,7 +7,7 @@ module Api
       step Contract::Build(constant: Jwt::Contract::Login)
       step Contract::Validate()
       step :find_user
-      step Rescue( JWTSessions::Errors::Error, handler: Jwt::Handlers::SessionErrorsHandler ) {
+      step Rescue( JWTSessions::Errors::Error, handler: Api::V1::Handlers::ErrorsHandler ) {
         step :create_session
         step :login
       }

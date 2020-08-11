@@ -30,4 +30,6 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  errors:
+    time_positive?: 'Time should be grater than 0'
+    grater_than_duration: 'Time can not be grater than duration'

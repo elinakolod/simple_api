@@ -85,7 +85,7 @@ RSpec.describe Api::V1::VideosController, type: :controller do
   describe 'POST #restart' do
     subject(:restart_processing) { post :restart, params: params, as: :json }
 
-    let(:video) { create(:video, file: video_file, user: user)}
+    let(:video) { create(:video, user: user)}
     let(:params) { { id: video.id, start: start_time, end: end_time } }
 
     before do
@@ -143,8 +143,8 @@ RSpec.describe Api::V1::VideosController, type: :controller do
   describe 'GET #index' do
     subject(:fetch_videos) { get :index }
 
-    let(:video) { create(:video, file: video_file, user: user) }
-    let(:another_video) { create(:video, file: file_fixture('video_copy.mp4').open) }
+    let(:video) { create(:video, user: user) }
+    let(:another_video) { create(:video) }
 
     before do
       video

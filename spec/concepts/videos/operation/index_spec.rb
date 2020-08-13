@@ -5,8 +5,8 @@ RSpec.describe Api::V1::Videos::Index do
 
   let(:user) { create(:user) }
   let(:video_file) { file_fixture('video.mp4').open }
-  let(:video) { create(:video, file: video_file, user: user)}
-  let(:another_video) { create(:video, file: video_file) }
+  let(:video) { create(:video, user: user)}
+  let(:another_video) { create(:video) }
 
   before do
     video

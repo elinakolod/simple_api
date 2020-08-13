@@ -6,7 +6,7 @@ RSpec.describe CutterJob, type: :job do
   let(:start_time) { 5 }
   let(:end_time) { 10 }
   let(:user) { create(:user) }
-  let(:video) { create(:video, file: file_fixture('video.mp4').open, user: user, status: 'scheduled')}
+  let(:video) { create(:video, user: user, status: 'scheduled') }
 
   it 'cuts video' do
     cut_video

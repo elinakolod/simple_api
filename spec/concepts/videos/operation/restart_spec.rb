@@ -6,7 +6,7 @@ RSpec.describe Api::V1::Videos::Restart do
   let(:start_time) { 5 }
   let(:end_time) { 10 }
   let(:user) { create(:user) }
-  let(:video) { create(:video, file: file_fixture('video.mp4').open, user: user, status: 'failed')}
+  let(:video) { create(:video, user: user, status: 'failed')}
   let(:params) { { id: video.id, start: start_time, end: end_time} }
 
   before do

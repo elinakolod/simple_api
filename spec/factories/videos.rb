@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :video do
-    image_data { "" }
+    file { nil }
+    status { nil }
     user
   end
 end

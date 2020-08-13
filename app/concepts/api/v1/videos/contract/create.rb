@@ -10,13 +10,16 @@ module Api
 
         validation do
           params do
-            required(:file).filled(:string)
-            required(:start).filled
-            required(:end).filled
+            required(:file).filled
+            required(:start).filled(:integer)
+            required(:end).filled(:integer)
           end
 
-          rule(:start, :end) do
-            key.failure(I18n.t('errors.time_positive?')) unless Float(value).positive?
+          rule(:start) do
+            key.failure(I18n.t('errors.time_positive?')) unless value.positive?
+          end
+          rule(:end) do
+            key.failure(I18n.t('errors.time_positive?')) unless value.positive?
           end
         end
       end

@@ -8,6 +8,7 @@ Shrine.storages = {
   store: Shrine::Storage::FileSystem.new("public", prefix: "uploads"),
 }
 
+Shrine.plugin :determine_mime_type
 Shrine.plugin :mongoid
 Shrine.plugin :cached_attachment_data
 Shrine.plugin :restore_cached_data

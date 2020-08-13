@@ -2,13 +2,18 @@
 
 class ApplicationController < ActionController::API
   include JWTSessions::RailsAuthorization
-  rescue_from JWTSessions::Errors::Unauthorized, with: :not_authorized
   include SimpleEndpoint::Controller
+  include Pundit
+
+  rescue_from JWTSessions::Errors::Unauthorized, with: :not_authorized
 
   private
 
   def current_user
-    @current_user ||= User.find(payload['user_id'])
+    token = request_cookies[JWTSessions.cookie_by(:access)]
+    @current_user ||= User.find(payload['user_id']) if token.present?
+  rescue JWTSessions::Errors::Expired
+    @current_user ||= User.find(claimless_payload['user_id'])
   end
 
   def not_authorized

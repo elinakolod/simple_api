@@ -12,7 +12,7 @@ module Api
         def invalid_time?(options, model:, params:, **)
           video_duration = model.file.duration
           options[:invalid_time] =
-            Float(params[:end]) > video_duration || Float(params[:start]) > video_duration
+            params[:end].to_i > video_duration || params[:start].to_i > video_duration
         end
 
         def raise_error(options, **)

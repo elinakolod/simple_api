@@ -4,6 +4,7 @@
 require 'spec_helper'
 require 'factory_bot'
 require 'sidekiq/testing'
+require 'json_matchers/rspec'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
@@ -12,14 +13,22 @@ require 'rspec/rails'
 
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
 
-DatabaseCleaner[:mongoid].strategy = :truncation
-
 Sidekiq::Testing.fake!
+JsonMatchers.schema_root = 'spec/support/api/v1/schemas'
 
 RSpec.configure do |config|
   # Remove this line to enable support for ActiveRecord
   config.use_active_record = false
 
+  config.before(:suite) do
+    DatabaseCleaner[:mongoid].strategy = :truncation
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
   # If you enable ActiveRecord support you should unncomment these lines,
   # note if you'd prefer not to run each example within a transaction, you
   # should set use_transactional_fixtures to false.

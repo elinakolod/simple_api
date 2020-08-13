@@ -3,7 +3,8 @@ module Api
   module V1
     class Videos::Restart < Trailblazer::Operation
       step Model(Video, :find_by)
-      step Contract::Build(constant: Videos::Contract::Create)
+      step Policy::Pundit(VideoPolicy, :restart?)
+      step Contract::Build(constant: Videos::Contract::Restart)
       step Contract::Validate()
       step Subprocess(Shared::Operation::CheckTime)
       step Subprocess(Shared::Operation::CutVideo)

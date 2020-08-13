@@ -5,7 +5,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.0'
 gem 'active_model_serializers'
-gem 'database_cleaner-mongoid'
 gem 'dry-validation'
 gem 'fast_jsonapi'
 gem 'jwt_sessions'
@@ -15,6 +14,7 @@ gem 'mongoid-rspec'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
+gem 'pundit'
 gem 'rails_best_practices'
 gem 'redis'
 gem 'reform-rails'
@@ -45,6 +45,11 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rspec-rails'
   gem 'rubocop'
+end
+
+group :test do
+  gem 'database_cleaner-mongoid'
+  gem 'json_matchers'
 end
 
 group :development do

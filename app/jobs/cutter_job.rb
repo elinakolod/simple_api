@@ -29,11 +29,11 @@ class CutterJob < ApplicationJob
     @cutting_options = { custom: %W[-ss #{start_time} -to #{end_time}] }
   end
 
-  def mark_as_done
-    video.update(status: 'done', file: File.open(OUTPUT_FILE_PATH))
-  end
-
   def set_processing
     video.update(status: 'processing')
+  end
+
+  def mark_as_done
+    video.update(status: 'done', file: File.open(OUTPUT_FILE_PATH))
   end
 end

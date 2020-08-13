@@ -154,6 +154,9 @@ GEM
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     json (2.3.1)
+    json_matchers (0.11.1)
+      json_schema
+    json_schema (0.20.9)
     jsonapi-renderer (0.2.2)
     jwt (2.2.1)
     jwt_sessions (2.5.2)
@@ -205,6 +208,8 @@ GEM
     public_suffix (4.0.5)
     puma (4.3.5)
       nio4r (~> 2.0)
+    pundit (2.1.0)
+      activesupport (>= 3.0.0)
     rack (2.2.3)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -368,12 +373,14 @@ DEPENDENCIES
   factory_bot_rails
   fast_jsonapi
   ffaker
+  json_matchers
   jwt_sessions
   listen (~> 3.2)
   mongoid (~> 7.0.5)
   mongoid-rspec
   pry-byebug
   puma (~> 4.1)
+  pundit
   rails (~> 6.0.3, >= 6.0.3.2)
   rails_best_practices
   redis

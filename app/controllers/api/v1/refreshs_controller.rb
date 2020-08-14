@@ -28,10 +28,7 @@ module Api
       end
 
       def set_token(token)
-        response.set_cookie(JWTSessions.access_cookie,
-                            value: token,
-                            httponly: true,
-                            secure: Rails.env.production?)
+        response.set_cookie(JWTSessions.access_cookie, value: token, httponly: true, secure: Rails.env.production?)
       end
     end
   end

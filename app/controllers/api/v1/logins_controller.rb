@@ -22,9 +22,7 @@ module Api
       end
 
       def set_token(token)
-        response.set_cookie(JWTSessions.access_cookie,
-                            value: token,
-                            httponly: true)
+        response.set_cookie(JWTSessions.access_cookie, value: token, httponly: true)
       end
     end
   end

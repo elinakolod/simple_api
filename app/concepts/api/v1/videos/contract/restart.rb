@@ -9,8 +9,8 @@ module Api
 
         validation do
           params do
-            required(:start).filled(:integer)
-            required(:end).filled(:integer)
+            required(:start).filled(:float)
+            required(:end).filled(:float)
           end
 
           rule(:start, :end) do

@@ -63,7 +63,7 @@ RSpec.describe Api::V1::Videos::Restart do
 
   context 'start time as string' do
     let(:start_time) { 'invalid_time' }
-    let(:error_message) { 'Start must be an integer' }
+    let(:error_message) { 'Start must be a float' }
 
     it 'returns error message' do
       result = restart_processing
@@ -79,7 +79,7 @@ RSpec.describe Api::V1::Videos::Restart do
 
   context 'end time as string' do
     let(:end_time) { 'invalid_time' }
-    let(:error_message) { 'End must be an integer' }
+    let(:error_message) { 'End must be a float' }
 
     it 'returns error message' do
       result = restart_processing

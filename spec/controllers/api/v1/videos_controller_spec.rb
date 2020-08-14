@@ -44,7 +44,7 @@ RSpec.describe Api::V1::VideosController, type: :controller do
 
     context 'time as string' do
       let(:start_time) { 'invalid_time' }
-      let(:error_message) { 'must be an integer' }
+      let(:error_message) { 'must be a float' }
 
       it 'returns error message' do
         expect { create_video }.not_to change { Video.count }
@@ -117,7 +117,7 @@ RSpec.describe Api::V1::VideosController, type: :controller do
 
     context 'time as string' do
       let(:start_time) { 'invalid_time' }
-      let(:error_message) { 'must be an integer' }
+      let(:error_message) { 'must be a float' }
 
       it 'returns error message' do
         expect { restart_processing }.not_to change { Video.count }

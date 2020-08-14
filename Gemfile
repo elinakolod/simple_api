@@ -50,6 +50,7 @@ end
 group :test do
   gem 'database_cleaner-mongoid'
   gem 'json_matchers'
+  gem 'simplecov', require: false
 end
 
 group :development do

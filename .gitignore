@@ -9,3 +9,7 @@
 .byebug_history
 /config/master.key
 /public/uploads
+/coverage/assets/
+/coverage/index.html
+/coverage/.resultset.json
+/coverage/.resultset.json.lock

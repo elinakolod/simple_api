@@ -92,4 +92,36 @@ RSpec.describe Api::V1::Videos::Restart do
       expect { restart_processing }.not_to change { Video.count }
     end
   end
+
+  context 'start time as string' do
+    let(:start_time) { 'invalid_time' }
+    let(:error_message) { 'Start must be a float' }
+
+    it 'returns error message' do
+      result = restart_processing
+      expect(result).to be_failure
+      expect(CutterJob).not_to have_received(:perform_later)
+      expect(result['contract.default'].errors.full_messages).to include(error_message)
+    end
+
+    it 'does not create video' do
+      expect { restart_processing }.not_to change { Video.count }
+    end
+  end
+
+  context 'end time as string' do
+    let(:end_time) { 'invalid_time' }
+    let(:error_message) { 'End must be a float' }
+
+    it 'returns error message' do
+      result = restart_processing
+      expect(result).to be_failure
+      expect(CutterJob).not_to have_received(:perform_later)
+      expect(result['contract.default'].errors.full_messages).to include(error_message)
+    end
+
+    it 'does not create video' do
+      expect { restart_processing }.not_to change { Video.count }
+    end
+  end
 end

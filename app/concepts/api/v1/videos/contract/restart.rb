@@ -13,7 +13,10 @@ module Api
             required(:end).filled(:float)
           end
 
-          rule(:start, :end) do
+          rule(:start) do
+            key.failure(I18n.t('errors.time_positive?')) unless value.positive?
+          end
+          rule(:end) do
             key.failure(I18n.t('errors.time_positive?')) unless value.positive?
           end
         end

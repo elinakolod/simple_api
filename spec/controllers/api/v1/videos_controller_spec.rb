@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::V1::VideosController, type: :controller do
+  include Docs::V1::Videos::Api
+
   let(:start_time) { 5 }
   let(:end_time) { 10 }
   let(:file_name) { 'video.mp4' }
@@ -17,12 +19,14 @@ RSpec.describe Api::V1::VideosController, type: :controller do
   end
 
   describe 'POST #create' do
+    include Docs::V1::Videos::Create
+
     subject(:create_video) { post :create, params: params, as: :json }
 
     let(:params) { { file: video_file, start: start_time, end: end_time } }
 
-    context 'valid params' do
-      it 'is successful' do
+    context 'valid params', :dox do
+      it 'uploads video and schedule for trimming' do
         expect { create_video }.to change { Video.count }.by(1)
         expect(response).to be_successful
         expect(CutterJob).to have_received(:perform_later)
@@ -83,6 +87,8 @@ RSpec.describe Api::V1::VideosController, type: :controller do
   end
 
   describe 'POST #restart' do
+    include Docs::V1::Videos::Restart
+
     subject(:restart_processing) { post :restart, params: params, as: :json }
 
     let(:video) { create(:video, user: user)}
@@ -93,7 +99,7 @@ RSpec.describe Api::V1::VideosController, type: :controller do
     end
 
     context 'valid params' do
-      it 'is successful' do
+      it 'restarts failed trimming', :dox do
         expect { restart_processing }.not_to change { Video.count }
         expect(response).to be_successful
         expect(CutterJob).to have_received(:perform_later)
@@ -141,6 +147,8 @@ RSpec.describe Api::V1::VideosController, type: :controller do
   end
 
   describe 'GET #index' do
+    include Docs::V1::Videos::Restart
+
     subject(:fetch_videos) { get :index }
 
     let(:video) { create(:video, user: user) }
@@ -151,7 +159,7 @@ RSpec.describe Api::V1::VideosController, type: :controller do
       another_video
     end
 
-    it 'is successful' do
+    it 'fetchs list of user videos', :dox do
       fetch_videos
       expect(response).to be_successful
       expect(response.body).to include(video.id.to_s)

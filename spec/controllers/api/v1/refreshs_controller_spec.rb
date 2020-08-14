@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::V1::RefreshsController, type: :controller do
+  include Docs::V1::Refresh::Api
+
   let(:access_cookie) { tokens[:access] }
   let(:csrf_token) { tokens[:csrf] }
   let(:user) { create(:user) }
@@ -9,6 +11,8 @@ RSpec.describe Api::V1::RefreshsController, type: :controller do
   let(:tokens) { session.login }
 
   describe 'POST #create' do
+    include Docs::V1::Refresh::Create
+
     before do
       JWTSessions.access_exp_time = 0
       tokens
@@ -17,7 +21,7 @@ RSpec.describe Api::V1::RefreshsController, type: :controller do
       request.headers[JWTSessions.csrf_header] = csrf_token
     end
 
-    it 'refreshes access token' do
+    it 'refreshes access token', :dox do
       post :create
       expect(response).to be_successful
       expect(JSON.parse(response.body)).to include('csrf')

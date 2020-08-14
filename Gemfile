@@ -49,6 +49,7 @@ end
 
 group :test do
   gem 'database_cleaner-mongoid'
+  gem 'dox', require: false
   gem 'json_matchers'
   gem 'simplecov', require: false
 end

@@ -100,6 +100,9 @@ GEM
     docile (1.3.2)
     down (5.1.1)
       addressable (~> 2.5)
+    dox (1.2.0)
+      rails (>= 4.0)
+      rspec-core
     dry-configurable (0.11.6)
       concurrent-ruby (~> 1.0)
       dry-core (~> 0.4, >= 0.4.7)
@@ -374,6 +377,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   database_cleaner-mongoid
+  dox
   dry-validation
   factory_bot_rails
   fast_jsonapi

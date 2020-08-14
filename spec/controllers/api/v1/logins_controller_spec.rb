@@ -1,13 +1,16 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::V1::LoginsController, type: :controller do
+  include Docs::V1::Login::Api
+
   describe 'POST #create' do
     let(:user) { create(:user) }
     let(:email) { user.email }
     let(:params) { { email: email } }
 
     context 'valid email' do
-      it 'returns http success' do
+      include Docs::V1::Login::Create
+      it 'returns http success', :dox do
         post :create, params: params
         expect(response).to be_successful
         expect(response.body).to match(/csrf/)

@@ -4,7 +4,7 @@ module Api
   module V1
     class LoginsController < ApplicationController
       def create
-        endpoint(operation: Jwt::Login)
+        endpoint(operation: Jwt::Operation::Login)
       end
 
       private

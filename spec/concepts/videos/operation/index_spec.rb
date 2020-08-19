@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-RSpec.describe Api::V1::Videos::Index do
-  subject(:fetch_videos) { Api::V1::Videos::Index.( current_user: user ) }
+RSpec.describe Api::V1::Videos::Operation::Index do
+  subject(:fetch_videos) { Api::V1::Videos::Operation::Index.( current_user: user ) }
 
   let(:user) { create(:user) }
   let(:video_file) { file_fixture('video.mp4').open }

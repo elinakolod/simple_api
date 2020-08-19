@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-RSpec.describe Api::V1::Videos::Restart do
-  subject(:restart_processing) { Api::V1::Videos::Restart.( params: params, current_user: user ) }
+RSpec.describe Api::V1::Videos::Operation::Restart do
+  subject(:restart_processing) { Api::V1::Videos::Operation::Restart.( params: params, current_user: user ) }
 
   let(:start_time) { 5 }
   let(:end_time) { 10 }

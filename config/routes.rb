@@ -5,9 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :logins, only: %i[create]
       resources :refreshs, only: %i[create]
-      resources :videos, only: %i[index create] do
-        post 'restart', on: :member
-      end
+      resources :videos, only: %i[index create update]
     end
   end
 end

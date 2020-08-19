@@ -86,10 +86,10 @@ RSpec.describe Api::V1::VideosController, type: :controller do
     end
   end
 
-  describe 'POST #restart' do
+  describe 'POST #update' do
     include Docs::V1::Videos::Restart
 
-    subject(:restart_processing) { post :restart, params: params, as: :json }
+    subject(:restart_processing) { post :update, params: params, as: :json }
 
     let(:video) { create(:video, user: user)}
     let(:params) { { id: video.id, start: start_time, end: end_time } }

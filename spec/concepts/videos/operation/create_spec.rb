@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-RSpec.describe Api::V1::Videos::Create do
-  subject(:create_video) { Api::V1::Videos::Create.( params: params, current_user: user ) }
+RSpec.describe Api::V1::Videos::Operation::Create do
+  subject(:create_video) { Api::V1::Videos::Operation::Create.( params: params, current_user: user ) }
 
   let(:start_time) { 5 }
   let(:end_time) { 10 }

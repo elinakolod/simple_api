@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Api::V1::Jwt::Refresh do
+RSpec.describe Api::V1::Jwt::Operation::Refresh do
   let(:access_cookie) { tokens[:access] }
   let(:csrf_token) { tokens[:csrf] }
   let(:user) { create(:user) }
@@ -8,7 +8,7 @@ RSpec.describe Api::V1::Jwt::Refresh do
   let(:session) { JWTSessions::Session.new(payload: payload, refresh_by_access_allowed: true) }
   let(:tokens) { session.login }
   let(:params) { { payload: session.payload } }
-  let(:refresh_token) { Api::V1::Jwt::Refresh.( params: params ) }
+  let(:refresh_token) { Api::V1::Jwt::Operation::Refresh.( params: params ) }
 
   before do
     JWTSessions.access_exp_time = 0

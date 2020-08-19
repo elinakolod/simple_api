@@ -6,15 +6,15 @@ module Api
       before_action :authorize_access_request!
 
       def index
-        endpoint operation: Videos::Index
+        endpoint operation: Videos::Operation::Index
       end
 
       def create
-        endpoint operation: Videos::Create
+        endpoint operation: Videos::Operation::Create
       end
 
-      def restart
-        endpoint operation: Videos::Restart
+      def update
+        endpoint operation: Videos::Operation::Restart
       end
 
       private

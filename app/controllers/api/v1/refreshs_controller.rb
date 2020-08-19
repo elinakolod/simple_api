@@ -6,7 +6,7 @@ module Api
       before_action :authorize_refresh_by_access_request!
 
       def create
-        endpoint(operation: Jwt::Refresh)
+        endpoint(operation: Jwt::Operation::Refresh)
       end
 
       private

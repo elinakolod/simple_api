@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-RSpec.describe Api::V1::Jwt::Login do
-  subject(:login_user) { Api::V1::Jwt::Login.( params: params ) }
+RSpec.describe Api::V1::Jwt::Operation::Login do
+  subject(:login_user) { Api::V1::Jwt::Operation::Login.( params: params ) }
 
   let(:user) { create(:user) }
   let(:email) { user.email }

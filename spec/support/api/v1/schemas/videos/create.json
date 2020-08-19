@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "required": ["data"],
+  "properties": {
+    "data": {
+      "items":{
+        "$ref": "file:/video.json#"
+      }
+    }
+  }
+}

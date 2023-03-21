@@ -1,0 +1,192 @@
+# Simple API for processing videos
+This are the docs for the API, all the resources and how to use it.
+
+# Group Auth
+
+
+## Login [api/v1/logins]
+### Resource for Login
+Endpoints for the Login
+
+
+### Create and sign in user [POST /api/v1/logins]
+
+
++ Request returns http success
+**POST**&nbsp;&nbsp;`/api/v1/logins`
+
+    + Headers
+
+            Content-Type: application/x-www-form-urlencoded
+
+    + Body
+
+            email=ashanti%40lubowitz.info
+
++ Response 200
+
+    + Headers
+
+            Content-Type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "csrf": "RPqTEKurmDIiAqs7Gi4Gfv+Ra4vrPryW7zgGmLlx4xLoAX6XyowZwjZeSBH1HKK+fx6NnXdvDfE0t7a84rQmHg=="
+            }
+
+## Refresh [/api/v1/refreshs]
+### Resource for Refresh
+Endpoints for the Refresh
+
+
+### Refresh access token for user [POST /api/v1/refreshs]
+
+
++ Request refreshes access token
+**POST**&nbsp;&nbsp;`/api/v1/refreshs`
+
+    + Headers
+
+            X-CSRF-Token: XxGWOo1tErm7AX8hO7Tym1qYsVWh4Q0IbrJeiqJn65jBXsa03Rv8vlkefa7faORLfD4+QwXgpvS5zbdqHTLxcQ==
+            Content-Type: application/x-www-form-urlencoded
+
++ Response 200
+
+    + Headers
+
+            Content-Type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "csrf": "hWm9MSzzVvwjbGq3QbDNwodW/LqHskTsDIRUEanlLW+LMEmAlk92OZh2qDHSj+9SSx3k1Y4GkKTpu0zGyG6NCA=="
+            }
+
+# Group Videos
+
+
+## Videos [/api/v1/videos]
+### Resource for Book
+Endpoints for the video resource
+
+
+### Upload video and send it to processing [POST /api/v1/videos.json]
+
+
++ Request uploads video and schedule for trimming
+**POST**&nbsp;&nbsp;`/api/v1/videos.json`
+
+    + Headers
+
+            X-CSRF-Token: sulE+/jV7lUjtTDmXK7ZcE1o1r4r4RM7ASl29UaXrCNECrNxU6/knCP18/FOHbQIZ+BpK8NuYzZ5StPT0SiMUg==
+            Content-Type: multipart/form-data; boundary=----------XnJLe9ZIbbGUYtzPQJ16u1
+
+    + Body
+
+            {
+              "file": {
+                "filename": "video.mp4",
+                "type": "text/plain",
+                "name": "file",
+                "tempfile": "#<File:0x0000555f9f909a08>",
+                "head": "Content-Disposition: form-data; name=\"file\"; filename=\"video.mp4\"\r\nContent-Type: text/plain\r\nContent-Length: 17839845\r\n"
+              },
+              "start": "5",
+              "end": "10"
+            }
+
++ Response 200
+
+    + Headers
+
+            Content-Type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "data": {
+                "id": "5f369c179fddf113ba0597fb",
+                "type": "video",
+                "attributes": {
+                  "status": "scheduled",
+                  "duration": 30.526667
+                },
+                "links": {
+                  "url": "/uploads/c5f15812c995c01511ea74d49cb3368b.mp4"
+                }
+              }
+            }
+
+### Restart failed request [POST /api/v1/videos/{id}/restart.json]
+
++ Parameters
+    + id: `5f369c189fddf113ba059805` (string, required)
+
++ Request restarts failed trimming
+**POST**&nbsp;&nbsp;`/api/v1/videos/5f369c189fddf113ba059805/restart.json`
+
+    + Headers
+
+            X-CSRF-Token: rEsSeGCqy2gqrIOz6AusNX4C7o9dKYrS79RI4BvFDZbPFHJxpGPXP0q4ymmhe8RYPP8b8tsGQtZYMkpDqeBLoQ==
+            Content-Type: application/json
+
+    + Body
+
+            {
+              "start": 5,
+              "end": 10
+            }
+
++ Response 200
+
+    + Headers
+
+            Content-Type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "data": {
+                "id": "5f369c189fddf113ba059805",
+                "type": "video",
+                "attributes": {
+                  "status": "scheduled",
+                  "duration": 30.526667
+                },
+                "links": {
+                  "url": "/uploads/54a0ddf1c2d68b06a1bc04c3026ec66d.mp4"
+                }
+              }
+            }
+
++ Request fetchs list of user videos
+**GET**&nbsp;&nbsp;`/api/v1/videos`
+
+    + Headers
+
+            X-CSRF-Token: xlG2OmiAJEQQONPaReU6DJlSgKTl4DU+OCRwiG8NnHvcCWFVf/nMcbYVKIeroK3nozSYZjbHwPRcz1u84NbMHQ==
+
++ Response 200
+
+    + Headers
+
+            Content-Type: application/json; charset=utf-8
+
+    + Body
+
+            {
+              "data": [
+                {
+                  "id": "5f369c189fddf113ba05980d",
+                  "type": "video",
+                  "attributes": {
+                    "status": null,
+                    "duration": 30.526667
+                  },
+                  "links": {
+                    "url": "/uploads/f829ba77fe4e2ff423a8cba69f9730ae.mp4"
+                  }
+                }
+              ]
+            }

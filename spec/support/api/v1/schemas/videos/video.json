@@ -1,0 +1,14 @@
+{
+  "id": "file:/video.json#",
+  "type": "object",
+  "required": ["attributes", "id", "links", "type"],
+  "properties": {
+    "attributes": {
+      "status": { "type": "string" },
+      "duration": { "type": "float" }
+    },
+    "id": { "type": "string" },
+    "links": { "url": { "type": "string" } },
+    "type": { "type": "string" }
+  }
+}
